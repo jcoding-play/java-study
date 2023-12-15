@@ -3,8 +3,13 @@ package date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -92,5 +97,13 @@ public class LocalDateTest {
         LocalDate second = LocalDate.of(2023, 12, 1);
 
         assertThat(first.equals(second)).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"MONDAY, 월요일", "TUESDAY, 화요일", "WEDNESDAY, 수요일", "THURSDAY, 목요일", "FRIDAY, 금요일", "SATURDAY, 토요일", "SUNDAY, 일요일"})
+    @DisplayName("요일 정보를 얻을 수 있다.")
+    void getDisplayName(DayOfWeek dayOfWeek, String expected) {
+        String actual = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.KOREAN);
+        assertThat(actual).isEqualTo(expected);
     }
 }
