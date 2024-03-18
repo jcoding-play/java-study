@@ -36,10 +36,8 @@ public class TestCode {
             this.age = age;
         }
 
-/*
         public String getName() {
             return name;
         }
-*/
     }
 }
